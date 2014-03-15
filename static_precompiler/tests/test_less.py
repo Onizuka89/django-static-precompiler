@@ -2,7 +2,11 @@
 from unittest import main, TestCase
 from django.template import Context
 from django.template.loader import get_template_from_string
-from mock import patch, MagicMock
+try:
+    from mock import patch, MagicMock
+except:
+    from unittest.mock import patch, MagicMock
+
 from static_precompiler.compilers import LESS
 from static_precompiler.exceptions import StaticCompilationError
 from static_precompiler.utils import normalize_path
