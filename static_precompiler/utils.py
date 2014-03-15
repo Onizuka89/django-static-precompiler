@@ -31,7 +31,8 @@ def fix_line_breaks(text):
 
 
 def get_hexdigest(plaintext, length=None):
-    digest = md5(smart_str(plaintext)).hexdigest()
+    plaintext = smart_str(plaintext).encode("utf-8")
+    digest = md5().hexdigest()
     if length:
         return digest[:length]
     return digest
