@@ -10,7 +10,10 @@ import re
 import shlex
 import socket
 import subprocess
-import urlparse
+try:
+    import urlparse
+except:
+    import urllib.parse as urlparse # dirty fix
 
 
 def normalize_path(posix_path):
@@ -95,7 +98,7 @@ class URLConverter(object):
             lambda matchobj: "url('{0}')".format(
                 self.convert_url(matchobj.group(1), source_dir)
             ),
-            content
+            content.decode(encoding="utf-8") # gritty
         )
 
 
