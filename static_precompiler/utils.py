@@ -76,7 +76,10 @@ def run_command(args, input=None, cwd=None):
 
     p = subprocess.Popen(args, **popen_kwargs)
 
-    return p.communicate(input.encode("utf-8"))
+    try:
+        return p.communicate(input.encode("utf-8"))
+    except:
+        return p.communicate(input)
 
 
 class URLConverter(object):
