@@ -1,6 +1,9 @@
 # coding: utf-8
 from django.core import management
-from mock import patch, MagicMock
+try:
+    from mock import patch, MagicMock
+except:
+    from unittest.mock import patch, MagicMock
 from unittest import TestCase, main
 from static_precompiler.compilers.base import BaseCompiler
 from static_precompiler.models import Dependency

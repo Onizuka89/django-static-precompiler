@@ -1,6 +1,9 @@
 # coding: utf-8
 from unittest import main, TestCase
-from mock import MagicMock
+try:
+    from mock import MagicMock
+except:
+    from unittest.mock import MagicMock
 from static_precompiler.utils import URLConverter
 
 

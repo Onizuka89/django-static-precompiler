@@ -163,6 +163,10 @@ class BaseCompiler(object):
             os.makedirs(output_dir)
 
         compiled_file = open(output_path, "w+")
+        try:
+            output = output.decode("utf-8")
+        except:
+            pass
         compiled_file.write(output)
         compiled_file.close()
 

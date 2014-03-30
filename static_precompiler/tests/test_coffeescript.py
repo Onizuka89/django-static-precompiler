@@ -2,7 +2,11 @@
 from unittest import main, TestCase
 from django.template import Context
 from django.template.loader import get_template_from_string
-from mock import patch, MagicMock
+try:
+    from mock import patch, MagicMock
+except:
+    from unittest.mock import patch, MagicMock
+
 from static_precompiler.compilers.coffeescript import CoffeeScript
 from static_precompiler.exceptions import StaticCompilationError
 

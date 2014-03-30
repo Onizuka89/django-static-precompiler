@@ -14,9 +14,12 @@ class BaseInlineNode(Node):
 
     @staticmethod
     def to_unicode(s):
-        if isinstance(s, unicode):
+        try: # will fail if it's python 3
+            if isinstance(s, unicode):
+                return s
+            return s.decode(settings.FILE_CHARSET)
+        except: # python 3 strings are unicode by default no need to change
             return s
-        return s.decode(settings.FILE_CHARSET)
 
     def render(self, context):
         source = self.nodelist.render(context)

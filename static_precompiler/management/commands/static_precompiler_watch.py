@@ -7,7 +7,7 @@ from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 import os
 import time
-
+import sys
 
 class EventHandler(FileSystemEventHandler):
 
@@ -26,13 +26,13 @@ class EventHandler(FileSystemEventHandler):
             if compiler.is_supported(path):
                 if self.verbosity > 1:
                     if e.event_type == "created":
-                        print "Created: '{0}'".format(path)
+                        print("Created: '{0}'".format(path))
                     else:
-                        print "Modified: '{0}'".format(path)
+                        print("Modified: '{0}'".format(path))
                 try:
                     compiler.handle_changed_file(path)
                 except (StaticCompilationError, ValueError), e:
-                    print e
+                    print(e)
                 break
 
 
@@ -44,7 +44,7 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
 
-        print "Watching '{0}' for changes.\nPress Control+C to exit.\n".format(STATIC_ROOT)
+        print("Watching '{0}' for changes.\nPress Control+C to exit.\n".format(STATIC_ROOT))
 
         verbosity = int(options["verbosity"])
 
@@ -61,7 +61,7 @@ class Command(NoArgsCommand):
                         try:
                             compiler.handle_changed_file(path)
                         except (StaticCompilationError, ValueError), e:
-                            print e
+                            print(e)
                         break
 
         observer = Observer()

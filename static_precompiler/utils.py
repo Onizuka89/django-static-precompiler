@@ -9,7 +9,11 @@ import os
 import re
 import socket
 import subprocess
-import urlparse
+try:
+    import urlparse
+except:
+    import urllib.parse as urlparse # dirty fix
+
 
 
 def normalize_path(posix_path):
@@ -27,7 +31,8 @@ def fix_line_breaks(text):
 
 
 def get_hexdigest(plaintext, length=None):
-    digest = md5(smart_str(plaintext)).hexdigest()
+    plaintext = smart_str(plaintext).encode("utf-8")
+    digest = md5().hexdigest()
     if length:
         return digest[:length]
     return digest
@@ -71,7 +76,10 @@ def run_command(args, input=None, cwd=None):
 
     p = subprocess.Popen(args, **popen_kwargs)
 
-    return p.communicate(input)
+    try:
+        return p.communicate(input.encode("utf-8"))
+    except:
+        return p.communicate(input)
 
 
 class URLConverter(object):
@@ -94,7 +102,7 @@ class URLConverter(object):
             lambda matchobj: "url('{0}')".format(
                 self.convert_url(matchobj.group(1), source_dir)
             ),
-            content
+            content.decode(encoding="utf-8") # gritty
         )
 
 
