@@ -9,7 +9,6 @@ import os
 import time
 import sys
 
-
 class EventHandler(FileSystemEventHandler):
 
     def __init__(self, verbosity, compilers):

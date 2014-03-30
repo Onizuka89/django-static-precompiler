@@ -18,7 +18,7 @@ class BaseInlineNode(Node):
             if isinstance(s, unicode):
                 return s
             return s.decode(settings.FILE_CHARSET)
-        except: # python 3 strings are unicode, no need to change
+        except: # python 3 strings are unicode by default, no need to change
             return s
 
     def render(self, context):
