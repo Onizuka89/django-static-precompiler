@@ -4,7 +4,10 @@ from django.core.exceptions import ImproperlyConfigured
 from django.utils.encoding import smart_str, smart_bytes
 from django.utils.importlib import import_module
 # noinspection PyUnresolvedReferences
-from six.moves import urllib
+try:
+    from six.moves import urllib
+except: # python 3 already have urllib, so may not be installed
+    import urllib
 from static_precompiler.exceptions import UnsupportedFile
 from static_precompiler.settings import MTIME_DELAY, POSIX_COMPATIBLE, STATIC_URL, COMPILERS
 import os
@@ -27,6 +30,7 @@ def fix_line_breaks(text):
 
 
 def get_hexdigest(plaintext, length=None):
+    digest = md5(smart_bytes(plaintext)).hexdigest()
     if length:
         return digest[:length]
     return digest
@@ -98,7 +102,7 @@ class URLConverter(object):
             lambda matchobj: "url('{0}')".format(
                 self.convert_url(matchobj.group(1), source_dir)
             ),
-            content.decode(encoding="utf-8") # gritty
+            content
         )
 
 

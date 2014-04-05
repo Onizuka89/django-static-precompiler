@@ -4,7 +4,7 @@ try:
     from mock import MagicMock
 except:
     from unittest.mock import MagicMock
-from mock import MagicMock
+
 from static_precompiler.utils import URLConverter
 import unittest
 
