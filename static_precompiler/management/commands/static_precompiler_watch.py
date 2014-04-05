@@ -1,4 +1,3 @@
-# coding: utf-8
 from django.core.management.base import NoArgsCommand
 from static_precompiler.exceptions import StaticCompilationError
 from static_precompiler.settings import STATIC_ROOT
@@ -31,7 +30,7 @@ class EventHandler(FileSystemEventHandler):
                         print("Modified: '{0}'".format(path))
                 try:
                     compiler.handle_changed_file(path)
-                except (StaticCompilationError, ValueError), e:
+                except (StaticCompilationError, ValueError) as e:
                     print(e)
                 break
 
@@ -60,7 +59,7 @@ class Command(NoArgsCommand):
                     if compiler.is_supported(path):
                         try:
                             compiler.handle_changed_file(path)
-                        except (StaticCompilationError, ValueError), e:
+                        except (StaticCompilationError, ValueError) as e:
                             print(e)
                         break
 
@@ -73,4 +72,3 @@ class Command(NoArgsCommand):
         except KeyboardInterrupt:
             observer.stop()
         observer.join()
-                        except:
