@@ -6,7 +6,7 @@ from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 import os
 import time
-import sys
+
 
 class EventHandler(FileSystemEventHandler):
 
